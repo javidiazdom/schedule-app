@@ -1,1 +1,1 @@
-mongo localhost:27017/basededatosprueba databaseConfig.js
+mongo localhost:27017/mdaDB databaseConfig.js
