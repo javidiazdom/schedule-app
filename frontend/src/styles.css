@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --main-bg: #12171B;
+    --main-bg: #12171B;
+    --accent-color: #445766;
+    --accent-color-2: #9CD0EE;
+    --button-fade: radial-gradient(45.19% 704.89% at 47.44% 57.6%, #FCFF6B 0%, #F0F415 100%);
+}
+
+html {
+    background-color: var(--main-bg);
+}
+
+body {
+    margin: 0px ;
+}
