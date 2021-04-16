@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {User} from '../models/User';
-import { HttpService } from '../http-service.service';
+import { User } from '../../models/User';
+import { HttpService } from '../../http-service.service';
 
 
 @Component({
