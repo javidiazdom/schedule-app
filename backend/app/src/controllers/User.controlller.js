@@ -4,11 +4,11 @@ const config = require('../../config.json');
 
 
 const login = async (loginCredentials) => {
-    const user = await User.find({username: loginCredentials.username});
+    const user = await User.findOne({username: loginCredentials.username});
     if (!user) {
         throw Error("El nombre de usuario es incorrecto");
     }
-    if (user.password !== loginCredentials.password) {
+    if (user.password != loginCredentials.password) {
         throw Error("La contraseña es incorrecta");
     }
     const accessToken = jwt.sign({user: user.username}, config.SECRET);
@@ -17,14 +17,18 @@ const login = async (loginCredentials) => {
 }
 
 const register = async (userData) => {
-    if (!userData.name || !userData.username || !userData.password || !userData.birtDate ) {
+    if (!userData.name || !userData.username || !userData.password || !userData.birthDate ) {
         throw Error("Campos insuficientes");
+    }
+    const existingUser = await User.find({username: userData.username});
+    if (existingUser[0]) {
+        throw Error("User already exists");
     }
     const newUser = new User({
         name: userData.name,
         username: userData.username,
         password: userData.password,
-        birtDate: userData.username,
+        birthDate: userData.birthDate,
         boards: [],
         tasks: []
     });
@@ -33,7 +37,8 @@ const register = async (userData) => {
 }
 
 const getUsers = async () => {
-    return await User.find();
+    const users = await User.find();
+    return users;
 }
 
 exports.login = login;

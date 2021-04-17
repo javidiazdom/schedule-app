@@ -30,12 +30,17 @@ module.exports = async function startServer () {
     })
 
     app.post("/register", async (req, res) => {
-        const response = await UserController.register(req.body); 
-        res.send(response);
+        try {
+            const response = await UserController.register(req.body); 
+            res.send(response);
+        } catch (error) {
+            res.status(401);
+            res.send(error.message);
+        }
     });
 
-    app.get("/users", (req, res) => {
-        const response = UserController.getUsers();
+    app.get("/users", async (req, res) => {
+        const response = await UserController.getUsers();
         res.send(response);
     })
 
