@@ -13,7 +13,9 @@
 
 label {
     font-family: Verdana,Geneva,sans-serif;
-    color: #B1CFE0; 
+    color: #B1CFE0;
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
 }
 
 .right {
@@ -48,11 +50,6 @@ h1 {
     font-family: 'Sura', serif;
     color: white;
     font-size: 3rem;
-}
-
-label {
-    margin-bottom: 0.8rem;
-    font-size: 1.2rem;
 }
 
 

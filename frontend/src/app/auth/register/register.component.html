@@ -1,1 +1,21 @@
-<p>register works!</p>
+<div class = "center">
+    <div class="form-container">
+        <label>
+            Nombre de usuario*
+        </label>
+        <input type="text" [formControl]="userName"/>
+        <label>
+            Nombre completo*
+        </label>
+        <input type="text" [formControl]="name"/>
+        <label>
+            Contraseña*
+        </label>
+        <input type="password" [formControl]="password"/>
+        <label>
+            Fecha de nacimiento*
+        </label>
+        <input type="text" [formControl]="birthDate"/>
+        <input type="submit" value="Registrarse" (click)="sendForm()"/>
+    </div>
+</div>
