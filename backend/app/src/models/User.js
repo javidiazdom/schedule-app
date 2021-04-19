@@ -10,5 +10,5 @@ module.exports = mongoose.model(
         boards: Array,
         tasks: Array
     },
-    "User"
+    "Users"
 )
