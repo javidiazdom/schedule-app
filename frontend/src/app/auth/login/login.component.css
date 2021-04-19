@@ -1,0 +1,99 @@
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.left {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+label {
+    font-family: Verdana,Geneva,sans-serif;
+    color: #B1CFE0;
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+}
+
+.right {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    background-color: #8A9EFF;
+}
+
+.calendar-img {
+    height: auto;
+    width: 100%;
+}
+
+.form-center {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.logo img {
+    margin-right: 2rem;
+}
+
+h1 {
+    font-family: 'Sura', serif;
+    color: white;
+    font-size: 3rem;
+}
+
+
+.input-group {
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 1rem;
+    align-items: center;
+    height: 4rem;
+    background-color: var(--accent-color);
+    margin-bottom: 3rem;
+}
+
+input[type=text], input[type=password] {
+    outline: none;
+    border: 0px;
+    height: 70%;
+    width: 95%;
+    background-color: transparent;
+    color: white;
+    font-size: 1.2rem;
+}
+
+input[type=submit] {
+    background: radial-gradient(45.19% 704.89% at 47.44% 57.6%, #FCFF6B 0%, #F0F415 100%);
+    border: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.8rem;
+    font-weight: bold;
+    width: 20rem;
+    height: 4rem;
+    border-radius: 1rem;
+    align-self: center;
+    cursor: pointer;
+    outline: none;
+}
+
+p {
+    align-self: center;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+a {
+    color: var(--light-yellow);
+}
