@@ -1,6 +1,6 @@
 const express = require('express');
-const mongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
+const cors = require('cors');
 const UserController = require('./controllers/User.controlller');
 const app = express();
 const port = 3000;
@@ -18,10 +18,12 @@ module.exports = async function startServer () {
     }
     
     app.use(express.json());
-
+    app.use(cors());
+    
     app.post("/login", async (req, res) => {
         try {
-            const response = await UserController.login(req.body); 
+            const response = await UserController.login(req.body);
+            res.status(200); 
             res.send(response);
         } catch (error) {
             res.status(401);
@@ -32,6 +34,7 @@ module.exports = async function startServer () {
     app.post("/register", async (req, res) => {
         try {
             const response = await UserController.register(req.body); 
+            res.status(200);
             res.send(response);
         } catch (error) {
             res.status(401);

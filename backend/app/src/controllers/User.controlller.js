@@ -13,7 +13,7 @@ const login = async (loginCredentials) => {
     }
     const accessToken = jwt.sign({user: user.username}, config.SECRET);
     // Add role
-    return {accessToken};
+    return {accessToken, user: user.name};
 }
 
 const register = async (userData) => {
