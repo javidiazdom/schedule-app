@@ -1,7 +1,8 @@
 const express = require('express');
 const mongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
-const UserController = require('./controllers/User.controlller');
+const UserController = require('./controllers/User.controller');
+const BoardController = require('./controllers/Board.controller');
 const app = express();
 const port = 3000;
 
@@ -27,7 +28,7 @@ module.exports = async function startServer () {
             res.status(401);
             res.send(error.message);
         }
-    })
+    });
 
     app.post("/register", async (req, res) => {
         try {
@@ -42,7 +43,12 @@ module.exports = async function startServer () {
     app.get("/users", async (req, res) => {
         const response = await UserController.getUsers();
         res.send(response);
-    })
+    });
+
+    app.post("/board", async (req, res) => {
+        const response = await UserController.requireAuth(req.header("Authorization"), BoardController.createBoard, req.body);
+        res.send(response);
+    });
 
     app.listen(port, () => console.log(`🚀 Escuchando en el puerto ${port}`));
 }

@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const config = require('../../config.json');
+const bcrypt = require('bcrypt');
 
 
 const login = async (loginCredentials) => {
@@ -8,7 +9,8 @@ const login = async (loginCredentials) => {
     if (!user) {
         throw Error("El nombre de usuario es incorrecto");
     }
-    if (user.password != loginCredentials.password) {
+    const valid = await bcrypt.compare(loginCredentials.password,user.password);
+    if (!valid) {
         throw Error("La contraseña es incorrecta");
     }
     const accessToken = jwt.sign({user: user.username}, config.SECRET);
@@ -17,20 +19,21 @@ const login = async (loginCredentials) => {
 }
 
 const register = async (userData) => {
-    if (!userData.name || !userData.username || !userData.password || !userData.birthDate ) {
+    if (!userData.name || !userData.username || !userData.password || !userData.birthDate) {
         throw Error("Campos insuficientes");
     }
     const existingUser = await User.find({username: userData.username});
     if (existingUser[0]) {
         throw Error("User already exists");
     }
+
+    const hashsedPassword = await bcrypt.hash(userData.password, 10);
     const newUser = new User({
         name: userData.name,
         username: userData.username,
-        password: userData.password,
+        password: hashsedPassword,
         birthDate: userData.birthDate,
-        boards: [],
-        tasks: []
+        boards: []
     });
     await newUser.save();
     return "Usuario creado";
@@ -41,6 +44,16 @@ const getUsers = async () => {
     return users;
 }
 
+const requireAuth = async (auth,f,params) => {
+    if(!auth) throw new Error("Necesitas estar logueado");
+    const token = auth.split("Bearer ")[1];
+    if(!token) throw new Error("Token invalido");
+    const user = await jwt.verify(token, config.SECRET);
+    if(!user) throw new Error("Usuario no identificado");
+    return await f(params,user);
+}
+
 exports.login = login;
 exports.register = register;
 exports.getUsers = getUsers;
+exports.requireAuth = requireAuth;

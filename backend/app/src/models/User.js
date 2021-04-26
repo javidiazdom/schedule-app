@@ -7,8 +7,7 @@ module.exports = mongoose.model(
         name: String,
         password: String,
         birthDate: String,
-        boards: Array,
-        tasks: Array
+        boards: Array
     },
     "Users"
 )
