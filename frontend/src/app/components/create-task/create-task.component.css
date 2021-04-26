@@ -1,0 +1,21 @@
+.createTask {
+    display: flex;
+    flex-direction: row;
+    height: 4rem;
+    background-color: rgba(252, 255, 107, 0.6);
+    border-radius: 1.5rem;
+    justify-content: left;
+    align-items: center;
+    max-width: 20rem;
+    cursor: pointer;
+}
+
+img{
+    margin: 0 1rem;
+}
+
+p {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    color: white;
+}

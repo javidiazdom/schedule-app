@@ -1,7 +1,12 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { HttpService } from '../../http-service.service';
 import {UserRegisterData} from '../../models/UserRegisterData';
+
+class RegisterResponse {
+  result: Boolean;
+}
 
 @Component({
   selector: 'app-register',
@@ -28,8 +33,10 @@ export class RegisterComponent implements OnInit {
       birthDate: this.birthDate.value,
       password: this.password.value
     }
-    this.httpService.register(newUser).subscribe((result) => {
-      console.log(result);
+    this.httpService.register(newUser).subscribe((response: RegisterResponse) => {
+      if (response.result) {
+        window.location.replace("/login");
+      }
     });
   }
 

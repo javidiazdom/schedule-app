@@ -33,7 +33,7 @@ const register = async (userData) => {
         tasks: []
     });
     await newUser.save();
-    return "Usuario creado";
+    return JSON.stringify({result: true});
 }
 
 const getUsers = async () => {

@@ -38,7 +38,7 @@ module.exports = async function startServer () {
             res.send(response);
         } catch (error) {
             res.status(401);
-            res.send(error.message);
+            res.send(JSON.stringify({error: error.message}));
         }
     });
 

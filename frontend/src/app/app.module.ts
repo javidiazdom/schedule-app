@@ -8,13 +8,17 @@ import { LoginComponent } from './auth/login/login.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { RegisterComponent } from './auth/register/register.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
+import { CreateTaskComponent } from './components/create-task/create-task.component';
+import { TaskComponent } from './components/task/task.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    MainPageComponent
+    MainPageComponent,
+    CreateTaskComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,
