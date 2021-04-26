@@ -24,7 +24,9 @@ export class LoginComponent implements OnInit {
     };
     this.httpService.login(user).subscribe(
       (res) => {
-        console.log(res)
+        sessionStorage.setItem('accessToken', res['accessToken']);
+        sessionStorage.setItem('user', res['user']);
+        window.location.replace("home")
     });
   }
 

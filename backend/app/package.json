@@ -9,7 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "bcrypt": "^5.0.1",
+=======
+    "cors": "^2.8.5",
+>>>>>>> 6187901f810e12ef74adb970313ba4cdbff18433
     "express": "^4.17.1",
     "mongodb": "^3.6.6",
     "mongoose": "^5.12.3"
