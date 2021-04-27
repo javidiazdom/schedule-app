@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {User} from './models/User';
 import {Routes} from './routes';
 import {UserRegisterData} from './models/UserRegisterData'
+import {Board} from './models/Board';
 
 
 @Injectable({
@@ -17,5 +18,19 @@ export class HttpService {
   }
   register(userResgisterData: UserRegisterData) {
     return this.http.post(Routes.register, userResgisterData);
+  }
+
+  getBoards() {
+
+  }
+
+  createBoard(board: Board) {
+    return this.http.post(Routes.createBoard, board, {headers: this.getHeaders()});
+  }
+
+  private getHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      'Authorization': 'Bearer '+ window.sessionStorage.getItem('accessToken')
+    });
   }
 }

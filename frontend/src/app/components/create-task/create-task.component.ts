@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { HttpService } from '../../http-service.service';
+import {Board} from '../../models/Board';
 
 @Component({
   selector: 'app-create-task',
@@ -8,9 +10,9 @@ import { FormControl } from '@angular/forms';
 })
 export class CreateTaskComponent implements OnInit {
 
-  constructor() { }
+  constructor(private httpService: HttpService) { }
 
-  taskName = new FormControl('');
+  boardName = new FormControl('');
   
   isEditing = false;
 
@@ -22,7 +24,15 @@ export class CreateTaskComponent implements OnInit {
   }
 
   sendForm(): void {
-    console.log(this.taskName.value);
+    const newBoard: Board = {
+      name: this.boardName.value,
+      pendingTasks: [],
+      inProgressTasks: [],
+      doneTasks: []
+    } 
+    this.httpService.createBoard(newBoard).subscribe((board) => {
+      console.log(board);
+    });
   }
 
 }

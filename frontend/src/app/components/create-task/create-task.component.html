@@ -1,5 +1,5 @@
 <div class="createTask">
     <img src="assets/icons/Add.svg"/>
     <p (click)="toggleForm()" *ngIf="!isEditing">Añadir nueva asignatura</p>
-    <input type="text" *ngIf="isEditing" (focusout)="toggleForm()" [formControl]="taskName" (keydown.enter)="sendForm()"/>
+    <input type="text" *ngIf="isEditing" (focusout)="toggleForm()" [formControl]="boardName" (keydown.enter)="sendForm()"/>
 </div>
