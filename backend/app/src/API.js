@@ -53,5 +53,15 @@ module.exports = async function startServer () {
         res.send(response);
     });
 
+    app.get("/board/:name", async (req, res) => {
+        const response = await UserController.requireAuth(req.header("Authorization"), BoardController.getBoardByName, req.params.name);
+        res.send(response);
+    });
+
+    app.get("/board", async (req, res) => {
+        const response = await UserController.requireAuth(req.header("Authorization"), BoardController.getBoards);
+        res.send(response);
+    });
+
     app.listen(port, () => console.log(`🚀 Escuchando en el puerto ${port}`));
 }
