@@ -15,7 +15,7 @@ const login = async (loginCredentials) => {
     }
     const accessToken = jwt.sign({user: user.username}, config.SECRET);
     // Add role
-    return JSON.stringify({accessToken, user: user.name});
+    return JSON.stringify({accessToken, user: user.name, username: user.username});
 }
 
 const register = async (userData) => {

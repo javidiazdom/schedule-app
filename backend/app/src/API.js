@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const UserController = require('./controllers/User.controlller');
+const UserController = require('./controllers/User.controller');
 const BoardController = require('./controllers/Board.controller');
 const app = express();
 const port = 3000;
@@ -50,6 +50,16 @@ module.exports = async function startServer () {
 
     app.post("/board", async (req, res) => {
         const response = await UserController.requireAuth(req.header("Authorization"), BoardController.createBoard, req.body);
+        res.send(response);
+    });
+
+    app.get("/board/:name", async (req, res) => {
+        const response = await UserController.requireAuth(req.header("Authorization"), BoardController.getBoardByName, req.params.name);
+        res.send(response);
+    });
+
+    app.get("/board", async (req, res) => {
+        const response = await UserController.requireAuth(req.header("Authorization"), BoardController.getBoards);
         res.send(response);
     });
 
