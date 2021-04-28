@@ -7,14 +7,19 @@ import { Board } from '../../models/Board';
   templateUrl: './boards-display.component.html',
   styleUrls: ['./boards-display.component.css']
 })
+
 export class BoardsDisplayComponent implements OnInit {
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {}
 
   boards: Board[] = [];
 
   ngOnInit(): void {
-    this.httpService.getBoards().subscribe((boards) => {
+    this.updateBoards();
+  }
+
+  updateBoards(): void {
+    this.httpService.getBoards().subscribe((boards: Board[] ) => {
       this.boards = boards;
     });
   }

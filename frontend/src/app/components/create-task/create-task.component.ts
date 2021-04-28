@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { HttpService } from '../../http-service.service';
-import {Board} from '../../models/Board';
+import { Board } from '../../models/Board';
+
 
 @Component({
   selector: 'app-create-task',
@@ -11,6 +12,8 @@ import {Board} from '../../models/Board';
 export class CreateTaskComponent implements OnInit {
 
   constructor(private httpService: HttpService) { }
+
+  @Output() boardCreatedEvent = new EventEmitter<string>();
 
   boardName = new FormControl('');
   
@@ -31,7 +34,7 @@ export class CreateTaskComponent implements OnInit {
       doneTasks: []
     } 
     this.httpService.createBoard(newBoard).subscribe((board) => {
-      console.log(board);
+      this.boardCreatedEvent.emit(newBoard.name as string);
     });
   }
 

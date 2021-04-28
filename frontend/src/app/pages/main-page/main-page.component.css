@@ -37,6 +37,7 @@ nav {
     flex-direction: row;
     width: 15rem;
     justify-content: space-between;
+    min-width: 20rem;
 }
 
 .user-actions {

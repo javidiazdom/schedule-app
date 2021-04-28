@@ -1,1 +1,6 @@
-woeijncvo`rwefin
+<div class = "board-container">
+    <div *ngFor = "let board of boards">
+        <app-board [board]=board></app-board>
+    </div>
+    <app-create-task (boardCreatedEvent)="updateBoards()"></app-create-task>
+</div>

@@ -4,6 +4,7 @@ import {User} from './models/User';
 import {Routes} from './routes';
 import {UserRegisterData} from './models/UserRegisterData'
 import {Board} from './models/Board';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -20,8 +21,8 @@ export class HttpService {
     return this.http.post(Routes.register, userResgisterData);
   }
 
-  getBoards() {
-
+  getBoards(): Observable<Board[]> {
+    return this.http.get<Board[]>(Routes.getBoards, {headers: this.getHeaders()});
   }
 
   createBoard(board: Board) {
