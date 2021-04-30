@@ -3,7 +3,7 @@ const User = require('../models/User');
 
 const createBoard = async (params, user) => {
     const actualUser = await User.findOne({username: user.user});
-    if(existBoardForUser(actualUser.boards, params.name)) throw Error("Board already exist");
+    if(existBoardForUser(actualUser.boards, params.name)) throw Error(`El tablero con nombre ${params.name} ya existe para el usuario ${user.user}`);
     const board = await Board.insertMany(params);
     actualUser.boards.push(board[0]);
     await User.findOneAndUpdate({username: user.user}, {boards: actualUser.boards}, {new : true});
@@ -11,11 +11,7 @@ const createBoard = async (params, user) => {
 };
 
 const existBoardForUser = (boards, newBoard) => {
-    
-    console.log(boards);
-    return boards.find((board) => {
-        return board.name === newBoard;
-    });
+    return boards.find((board) => board.name === newBoard);
 };
 
 const getBoardByName = async (params, user) => {
