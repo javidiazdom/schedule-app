@@ -4,7 +4,9 @@ module.exports = mongoose.model(
     "Tablero",
     {
         name: String,
-        tasks: Array
+        pendingTasks: Array,
+        doneTasks: Array,
+        inProgressTasks: Array
     },
     "Tableros"
 )

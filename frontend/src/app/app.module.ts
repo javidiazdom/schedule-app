@@ -10,6 +10,9 @@ import { RegisterComponent } from './auth/register/register.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { CreateTaskComponent } from './components/create-task/create-task.component';
 import { TaskComponent } from './components/task/task.component';
+import { LogoutComponent } from './auth/logout/logout.component';
+import { BoardsDisplayComponent } from './components/boards-display/boards-display.component';
+import { BoardComponent } from './components/board/board.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { TaskComponent } from './components/task/task.component';
     RegisterComponent,
     MainPageComponent,
     CreateTaskComponent,
-    TaskComponent
+    TaskComponent,
+    LogoutComponent,
+    BoardsDisplayComponent,
+    BoardComponent
   ],
   imports: [
     BrowserModule,
