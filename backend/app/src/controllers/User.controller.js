@@ -53,7 +53,17 @@ const requireAuth = async (auth,f,params) => {
     return await f(params,user);
 }
 
+const requireAuthExtraParams = async (auth,f,params,aditionalParams) => {
+    if(!auth) throw new Error("Necesitas estar logueado");
+    const token = auth.split("Bearer ")[1];
+    if(!token) throw new Error("Token invalido");
+    const user = await jwt.verify(token, config.SECRET);
+    if(!user) throw new Error("Usuario no identificado");
+    return await f(params,aditionalParams,user);
+}
+
 exports.login = login;
 exports.register = register;
 exports.getUsers = getUsers;
 exports.requireAuth = requireAuth;
+exports.requireAuthExtraParams = requireAuthExtraParams;

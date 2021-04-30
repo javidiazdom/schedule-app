@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const UserController = require('./controllers/User.controller');
 const BoardController = require('./controllers/Board.controller');
+const TaskController = require('./controllers/Task.controller');
+const User = require('./models/User');
 const app = express();
 const port = 3000;
 
@@ -44,23 +46,54 @@ module.exports = async function startServer () {
     });
 
     app.get("/users", async (req, res) => {
-        const response = await UserController.getUsers();
-        res.send(response);
+        try {
+            const response = await UserController.getUsers();
+            res.send(response);
+        } catch (error) {
+            res.status(401);
+            res.send(JSON.stringify({error: error.message}));
+        }
+        
     });
 
     app.post("/board", async (req, res) => {
-        const response = await UserController.requireAuth(req.header("Authorization"), BoardController.createBoard, req.body);
-        res.send(response);
+        try {
+            const response = await UserController.requireAuth(req.header("Authorization"), BoardController.createBoard, req.body);
+            res.send(response);
+        } catch (error) {
+            res.status(401);
+            res.send(JSON.stringify({error: error.message}));
+        }
     });
 
     app.get("/board/:name", async (req, res) => {
-        const response = await UserController.requireAuth(req.header("Authorization"), BoardController.getBoardByName, req.params.name);
-        res.send(response);
+        try {
+            const response = await UserController.requireAuth(req.header("Authorization"), BoardController.getBoardByName, req.params.name);
+            res.send(response);
+        } catch (error) {
+            res.status(401);
+            res.send(JSON.stringify({error: error.message}));
+        }
     });
 
     app.get("/board", async (req, res) => {
-        const response = await UserController.requireAuth(req.header("Authorization"), BoardController.getBoards);
-        res.send(response);
+        try {
+            const response = await UserController.requireAuth(req.header("Authorization"), BoardController.getBoards);
+            res.send(response);
+        } catch (error) {
+            res.status(401);
+            res.send(JSON.stringify({error: error.message}));
+        }
+    });
+
+    app.post("/task/:boardName", async (req, res) => {
+        try {
+            const response = await UserController.requireAuthExtraParams(req.header("Authorization"), TaskController.createTask, req.body, req.params.boardName);
+            res.send(response);
+        } catch (error) {
+            res.status(401);
+            res.send(JSON.stringify({error: error.message}));
+        }
     });
 
     app.listen(port, () => console.log(`🚀 Escuchando en el puerto ${port}`));
