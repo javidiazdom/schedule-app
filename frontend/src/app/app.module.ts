@@ -26,7 +26,7 @@ import { CreateJobComponent } from './components/create-job/create-job.component
     LogoutComponent,
     BoardsDisplayComponent,
     BoardComponent,
-    CreateJobComponent
+    CreateJobComponent,
   ],
   imports: [
     BrowserModule,

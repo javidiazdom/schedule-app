@@ -29,9 +29,7 @@ export class CreateTaskComponent implements OnInit {
   sendForm(): void {
     const newBoard: Board = {
       name: this.boardName.value,
-      pendingTasks: [],
-      inProgressTasks: [],
-      doneTasks: []
+      tasks: []
     } 
     this.httpService.createBoard(newBoard).subscribe((board) => {
       this.boardCreatedEvent.emit(newBoard.name as string);

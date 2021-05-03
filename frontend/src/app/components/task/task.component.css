@@ -1,0 +1,8 @@
+.task {
+    font-weight: 100;
+    display: flex;
+    flex-direction: row;
+}
+img {
+    margin-right: 1rem;
+}

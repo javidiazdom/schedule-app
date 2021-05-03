@@ -2,6 +2,10 @@
     <p>{{board.name}}</p>
     <div class = "tasks-container">
         <p>Por hacer</p>
+        <div *ngFor = "let task of tasks" className = "task">
+            <app-task [task]=task></app-task>
+        </div>
+        <app-create-job [boardName]=board.name></app-create-job>
     </div>
     <div class = "tasks-container">
         <p>En progreso</p>

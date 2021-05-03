@@ -1,5 +1,5 @@
 <div class="createJob">
-    <img src="assets/icons/Add.svg"/>
+    <img src="assets/icons/Add-black.svg"/>
     <p (click)="toggleForm()" *ngIf="!isEditing">Añadir nueva tarea</p>
     <input type="text"  *ngIf="isEditing" (focusout)="toggleForm()" [formControl]="jobName" (keydown.enter)="sendForm()"/>
 </div>

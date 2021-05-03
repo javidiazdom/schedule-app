@@ -92,6 +92,7 @@ module.exports = async function startServer () {
             const response = await UserController.requireAuthExtraParams(req.header("Authorization"), TaskController.createTask, req.body, req.params.boardName);
             res.send(response);
         } catch (error) {
+            console.log(error);
             res.status(401);
             res.send(JSON.stringify({error: error.message}));
         }
