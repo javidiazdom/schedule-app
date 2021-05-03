@@ -13,6 +13,7 @@ import { TaskComponent } from './components/task/task.component';
 import { LogoutComponent } from './auth/logout/logout.component';
 import { BoardsDisplayComponent } from './components/boards-display/boards-display.component';
 import { BoardComponent } from './components/board/board.component';
+import { CreateJobComponent } from './components/create-job/create-job.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { BoardComponent } from './components/board/board.component';
     TaskComponent,
     LogoutComponent,
     BoardsDisplayComponent,
-    BoardComponent
+    BoardComponent,
+    CreateJobComponent
   ],
   imports: [
     BrowserModule,

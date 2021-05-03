@@ -4,6 +4,7 @@ import {User} from './models/User';
 import {Routes} from './routes';
 import {UserRegisterData} from './models/UserRegisterData'
 import {Board} from './models/Board';
+import { Task } from './models/Task';
 
 
 @Injectable({
@@ -26,6 +27,10 @@ export class HttpService {
 
   createBoard(board: Board) {
     return this.http.post(Routes.createBoard, board, {headers: this.getHeaders()});
+  }
+
+  createTask(task: Task){
+    return this.http.post(Routes.createTask, task, {headers: this.getHeaders()});  
   }
 
   private getHeaders(): HttpHeaders {
