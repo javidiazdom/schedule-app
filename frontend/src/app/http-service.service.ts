@@ -34,6 +34,10 @@ export class HttpService {
     return this.http.post(Routes.createTask(task.boardName), task, {headers: this.getHeaders()});  
   }
 
+  deleteUser() {
+    return this.http.post(Routes.deleteUser,{},{headers: this.getHeaders()});
+  }
+
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
       'Authorization': 'Bearer '+ window.sessionStorage.getItem('accessToken')

@@ -62,8 +62,20 @@ const requireAuthExtraParams = async (auth,f,params,aditionalParams) => {
     return await f(params,aditionalParams,user);
 }
 
+const deleteUser = async (params, user) => {
+    console.log(user);
+    try {
+        await User.deleteOne({username: user.user});
+        return true; 
+    } catch (error) {
+        return error;
+    }
+}
+
+
 exports.login = login;
 exports.register = register;
 exports.getUsers = getUsers;
 exports.requireAuth = requireAuth;
 exports.requireAuthExtraParams = requireAuthExtraParams;
+exports.deleteUser = deleteUser;

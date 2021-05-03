@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { BoardsStatusService } from 'src/app/boards-status.service';
 import { HttpService } from '../../http-service.service';
 import { Board } from '../../models/Board';
 
@@ -10,7 +12,15 @@ import { Board } from '../../models/Board';
 
 export class BoardsDisplayComponent implements OnInit {
 
-  constructor(private httpService: HttpService) {}
+  subscription: Subscription;
+
+  constructor(private httpService: HttpService, private boardStatusService: BoardsStatusService) {
+    this.subscription = this.boardStatusService.getUpdate().subscribe(
+      message => {
+        this.updateBoards();
+      }
+    )
+  }
 
   boards: Board[] = [];
 

@@ -35,6 +35,17 @@ module.exports = async function startServer () {
         }
     });
 
+    app.post("/deleteUser", async (req, res) => {
+        try {
+            const response = await UserController.requireAuth(req.header("Authorization"), UserController.deleteUser, req.body); 
+            res.status(200);
+            res.send(response);
+        } catch (error) {
+            res.status(401);
+            res.send(JSON.stringify({error: error.message}));
+        }
+    })
+
     app.post("/register", async (req, res) => {
         try {
             const response = await UserController.register(req.body); 

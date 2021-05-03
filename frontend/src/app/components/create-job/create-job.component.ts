@@ -2,6 +2,8 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { HttpService } from '../../http-service.service';
 import { Task } from 'src/app/models/Task';
+import { BoardsStatusService } from '../../boards-status.service';
+
 
 @Component({
   selector: 'app-create-job',
@@ -12,7 +14,7 @@ export class CreateJobComponent implements OnInit {
 
   @Input() boardName: String;
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService, private boardStatusService: BoardsStatusService) { }
 
   jobName = new FormControl('');
 
@@ -32,8 +34,7 @@ export class CreateJobComponent implements OnInit {
       boardName: this.boardName
     } 
     this.httpService.createTask(newJob).subscribe((board) => {
-      // Buscar la manera de notificar a boards display
-      // this.boardCreatedEvent.emit("Created task");
+      this.boardStatusService.updateBoards();
     });
   }
 

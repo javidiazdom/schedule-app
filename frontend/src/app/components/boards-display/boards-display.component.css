@@ -2,4 +2,19 @@
     display: flex;
     flex-direction: row;
     overflow-x: scroll;
+    height: 100%;
+}
+
+.board-container::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.board-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.board-container::-webkit-scrollbar-thumb {
+    border-radius:5px;
+    background-color: #263038;  
 }

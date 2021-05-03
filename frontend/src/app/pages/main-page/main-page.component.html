@@ -9,12 +9,13 @@
             <p>Todas las tareas</p>
         </nav>
         <div class = "user-actions">
-            <p>Bienvenido, <b>{{ userName }}</b> </p>
+            <div class = "user-actions-row">
+                <p>Bienvenido, <b>{{ userName }}</b> </p><img (click)="deleteUser()" src="assets/icons/Thrash.svg">
+            </div>
             <app-logout></app-logout>
         </div>
     </div>
     <div class = "body">
-        
         <app-boards-display></app-boards-display>
     </div>
     <div class = "footer">
