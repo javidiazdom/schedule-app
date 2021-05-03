@@ -5,6 +5,7 @@ const UserController = require('./controllers/User.Controller');
 const BoardController = require('./controllers/Board.controller');
 const TaskController = require('./controllers/Task.controller');
 const User = require('./models/User');
+const Task = require('./models/Task');
 const app = express();
 const port = 3000;
 
@@ -89,6 +90,26 @@ module.exports = async function startServer () {
     app.post("/task/:boardName", async (req, res) => {
         try {
             const response = await UserController.requireAuthExtraParams(req.header("Authorization"), TaskController.createTask, req.body, req.params.boardName);
+            res.send(response);
+        } catch (error) {
+            res.status(401);
+            res.send(JSON.stringify({error: error.message}));
+        }
+    });
+
+    app.get("/tasks", async (req, res) => {
+        try {
+            const response = await UserController.requireAuth(req.header("Authorization"), TaskController.getTasks);
+            res.send(response);
+        } catch (error) {
+            res.status(401);
+            res.send(JSON.stringify({error: error.message}));
+        }
+    });
+
+    app.get("/tasks/:boardName", async (req, res) => {
+        try {
+            const response = await UserController.requireAuth(req.header("Authorization"), TaskController.getTasksByBoardName, req.params.boardName);
             res.send(response);
         } catch (error) {
             res.status(401);

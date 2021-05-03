@@ -1,10 +1,11 @@
 const User = require('../models/User');
 const Board = require('../models/Board');
 const Task = require('../models/Task');
+const { getBoardByName } = require('./Board.controller');
 
 const createTask = async (task, boardName, user) => {
     const actualBoard = await getActualBoard(boardName, user.user);
-    if(await existTaskWithName(user.user, task.name)) throw new Error(`Ya existe una tarea con el nombre ${task.name} en el usuario ${user.user}`);
+    if(await existTaskWithName(user.user, task.name, boardName)) throw new Error(`Ya existe una tarea con el nombre ${task.name} en el usuario ${user.user}`);
     const tasks = await Task.insertMany(task);
     actualBoard.tasks.push(tasks[0]);
     await Board.findOneAndUpdate({_id: actualBoard._id}, actualBoard, {new: true});
@@ -13,13 +14,15 @@ const createTask = async (task, boardName, user) => {
     return tasks[0];
 };
 
-const existTaskWithName = async (username, taskName) => {
+const existTaskWithName = async (username, taskName, boardName) => {
     const user = await User.findOne({username: username});
     const userBoards = user.boards;
     for(board of userBoards) {
-        const tasks = board.tasks;
-        const search = tasks.find(task => task.name == taskName);
-        if(search != null || search != undefined) return true;
+        if(board.name === boardName) {
+            const tasks = board.tasks;
+            const search = tasks.find(task => task.name == taskName);
+            if(search != null || search != undefined) return true;
+        }
     }
     return false;
 };
@@ -44,5 +47,22 @@ const getUpdatedBoards = async (username) => {
     return updatedBoards;
 };
 
+const getTasks = async (params, user) => {
+    const actualUser = await User.findOne({username:user.user});
+    const boards = actualUser.boards;
+    let tasks = [];
+    for(board of boards) {
+        const actualTasks = board.tasks;
+        actualTasks.forEach((task) => tasks.push(task));
+    }
+    return tasks;   
+};
+
+const getTasksByBoardName = async (params, user) => {
+    const actualBoard = await getBoardByName(params, user);
+    return actualBoard[0].tasks;   
+};
 
 exports.createTask = createTask;
+exports.getTasks = getTasks;
+exports.getTasksByBoardName = getTasksByBoardName;
