@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Task } from 'src/app/models/Task';
 import { HttpService } from '../../http-service.service';
+import { Task } from 'src/app/models/Task';
 
 @Component({
   selector: 'app-create-job',
@@ -9,6 +9,8 @@ import { HttpService } from '../../http-service.service';
   styleUrls: ['./create-job.component.css']
 })
 export class CreateJobComponent implements OnInit {
+
+  @Input() boardName: String;
 
   constructor(private httpService: HttpService) { }
 
@@ -20,8 +22,8 @@ export class CreateJobComponent implements OnInit {
   sendForm(): void {
     const newJob: Task = {
       name: this.jobName.value,
-      descripcion: "";
-      boardName: ;
+      descripcion: "",
+      boardName: this.boardName
     } 
     this.httpService.createTask(newJob).subscribe((board) => {
       console.log(board);
