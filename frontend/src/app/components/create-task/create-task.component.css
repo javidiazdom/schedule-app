@@ -8,6 +8,8 @@
     align-items: center;
     max-width: 20rem;
     cursor: pointer;
+    margin: 1rem;
+    padding-right: 2rem;
 }
 
 img{

@@ -1,0 +1,21 @@
+.board {
+    padding: 0.5rem 2rem;
+    background-color: #FCFF6B;
+    border-radius: 1.5rem;
+    color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    min-width: 20rem;
+    margin: 1rem;
+}
+
+.tasks-container {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 1rem 1.5rem;
+    margin-bottom: 0.8rem;
+    border-radius: 1rem;
+}
+
+.tasks-container p {
+    margin: 0 0 1rem 0;
+}
