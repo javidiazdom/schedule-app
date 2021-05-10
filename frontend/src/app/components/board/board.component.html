@@ -3,7 +3,7 @@
     <div class = "tasks-container">
         <p>Por hacer</p>
         <div *ngFor = "let task of tasks" className = "task">
-            <app-task [task]=task></app-task>
+            <app-task [task]=task [board]="board"></app-task>
         </div>
         <app-create-job [boardName]=board.name></app-create-job>
     </div>

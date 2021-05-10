@@ -63,6 +63,19 @@ const getTasksByBoardName = async (params, user) => {
     return actualBoard[0].tasks;   
 };
 
+const getTaskByTaskName = async (params, user) => {
+    console.log(params.boardId);
+    const actualBoard = await Board.findOne({_id: params.boardId});
+    task = null;
+    actualBoard.tasks.forEach((currentTask) => {
+        if (currentTask._id == params.taskId) {
+            task = currentTask;
+        }
+    });
+    return task;
+}
+
 exports.createTask = createTask;
 exports.getTasks = getTasks;
 exports.getTasksByBoardName = getTasksByBoardName;
+exports.getTaskByTaskName = getTaskByTaskName;

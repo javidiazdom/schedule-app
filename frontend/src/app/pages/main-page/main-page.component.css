@@ -60,6 +60,8 @@ img {
 
 .body {
     grid-area: body;
+    display: grid;
+    grid-template-columns: 75% 25%;
 }
 
 .footer {

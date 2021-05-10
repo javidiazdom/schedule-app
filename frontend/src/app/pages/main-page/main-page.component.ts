@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { HttpService } from "../../http-service.service";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-main-page',
@@ -8,9 +10,13 @@ import { HttpService } from "../../http-service.service";
 })
 export class MainPageComponent implements OnInit {
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService, private route: ActivatedRoute) { }
 
-  userName: String = sessionStorage.getItem('user'); 
+  userName: String = sessionStorage.getItem('user');
+
+  currentBoard: String;
+
+  currentTask: String;
 
   deleteUser(): void {
     if (confirm("¿Está seguro de que desea eliminar la cuenta de usuario?")) {
@@ -27,6 +33,9 @@ export class MainPageComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    const routeParams = this.route.snapshot.paramMap;
+    this.currentTask = routeParams.get('taskId');
+    this.currentBoard = routeParams.get('boardId');
   }
 
 }

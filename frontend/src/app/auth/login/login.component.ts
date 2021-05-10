@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
       (res) => {
         sessionStorage.setItem('accessToken', res['accessToken']);
         sessionStorage.setItem('user', res['user']);
-        window.location.replace("home")
+        window.location.replace("boards")
     });
   }
 
