@@ -28,6 +28,12 @@ const getBoards = async (params, user) => {
     
 };
 
+const deleteBoard = async (boardName, user) => {
+    const actualBoard = await getBoardByName(boardName, user);
+    await Board.deleteOne({_id: actualBoard[0]._id});
+};
+
 exports.createBoard = createBoard;
 exports.getBoardByName = getBoardByName;
 exports.getBoards = getBoards;
+exports.deleteBoard = deleteBoard;
