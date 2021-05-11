@@ -129,5 +129,25 @@ module.exports = async function startServer () {
         }
     });
 
+    app.post("/task/:boardName", async (req, res) => {
+        try {
+            await UserController.requireAuth(req.header("Authorization"), TaskController.getTasksByBoardName, req.params.boardName);
+        } catch(error) {
+            res.status(401);
+            res.send(JSON.stringify({error: error.message}))
+        }
+    });
+
+    app.post("/task/:boardName/:taskId", async (req, res) => {
+        try {
+            await UserController.requireAuthExtraParams(req.header("Authorization"), TaskController.removeTask, req.params.boardName, req.params.taskId);
+            res.status(200);
+            res.send("Borrado con exito");
+        } catch(error) {
+            res.status(401);
+            res.send(JSON.stringify({error: error.message}))
+        }
+    });
+
     app.listen(port, () => console.log(`🚀 Escuchando en el puerto ${port}`));
 }

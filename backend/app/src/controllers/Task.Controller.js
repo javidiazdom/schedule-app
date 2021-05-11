@@ -63,6 +63,29 @@ const getTasksByBoardName = async (params, user) => {
     return actualBoard[0].tasks;   
 };
 
+const removeTask = async (boardName, id, user) => {
+    await Task.findByIdAndDelete(id);
+    await updateBoard(boardName, user);
+    await updateUser(boardName, user);
+};
+
+const updateBoard = async (boardName, user) => {
+    const updatedTasks = [];
+    const actualBoard = await getBoardByName(boardName, user);
+    for(task of actualBoard[0].tasks) {
+        const actualTask = await Task.findById(task._id);
+        if(actualTask) updatedTasks.push(task);
+    }
+    await Board.findOneAndUpdate({name: boardName}, {tasks: updatedTasks}, {new : true});
+};
+
+const updateUser = async (boardName, user) => {
+    const actualBoard = await getBoardByName(boardName, user);
+    const updatedBoard = await Board.findById(actualBoard[0]._id);
+    await User.findOneAndUpdate({username: user.user}, {boards: updatedBoard}, {new : true});
+};
+
 exports.createTask = createTask;
 exports.getTasks = getTasks;
 exports.getTasksByBoardName = getTasksByBoardName;
+exports.removeTask = removeTask;
