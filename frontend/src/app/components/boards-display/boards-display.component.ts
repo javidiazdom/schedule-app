@@ -25,13 +25,16 @@ export class BoardsDisplayComponent implements OnInit {
   boards: Board[] = [];
 
   ngOnInit(): void {
-    this.updateBoards();
-  }
-
-  updateBoards(): void {
-    this.httpService.getBoards().subscribe((boards: Board[] ) => {
-      this.boards = boards;
+    this.updateBoards().then(() => {
+      console.log(this.boards);
     });
   }
 
+  async updateBoards(): Promise<void> {
+    this.boards = await this.httpService.getBoards().toPromise();
+    /*
+    ((boards: Board[] ) => {
+      this.boards = boards;
+    });*/
+  }
 }

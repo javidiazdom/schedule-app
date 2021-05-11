@@ -63,7 +63,6 @@ const requireAuthExtraParams = async (auth,f,params,aditionalParams) => {
 }
 
 const deleteUser = async (params, user) => {
-    console.log(user);
     try {
         await User.deleteOne({username: user.user});
         return true; 

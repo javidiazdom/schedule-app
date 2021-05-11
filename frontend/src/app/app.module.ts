@@ -14,6 +14,7 @@ import { LogoutComponent } from './auth/logout/logout.component';
 import { BoardsDisplayComponent } from './components/boards-display/boards-display.component';
 import { BoardComponent } from './components/board/board.component';
 import { CreateJobComponent } from './components/create-job/create-job.component';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CreateJobComponent } from './components/create-job/create-job.component
     BoardsDisplayComponent,
     BoardComponent,
     CreateJobComponent,
+    SideBarComponent,
   ],
   imports: [
     BrowserModule,

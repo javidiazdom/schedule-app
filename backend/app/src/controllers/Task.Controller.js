@@ -85,7 +85,20 @@ const updateUser = async (boardName, user) => {
     await User.findOneAndUpdate({username: user.user}, {boards: updatedBoard}, {new : true});
 };
 
+const getTaskByTaskName = async (params, user) => {
+    console.log(params.boardId);
+    const actualBoard = await Board.findOne({_id: params.boardId});
+    task = null;
+    actualBoard.tasks.forEach((currentTask) => {
+        if (currentTask._id == params.taskId) {
+            task = currentTask;
+        }
+    });
+    return task;
+}
+
 exports.createTask = createTask;
 exports.getTasks = getTasks;
 exports.getTasksByBoardName = getTasksByBoardName;
 exports.removeTask = removeTask;
+exports.getTaskByTaskName = getTaskByTaskName;

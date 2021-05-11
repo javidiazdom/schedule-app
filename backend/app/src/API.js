@@ -98,9 +98,19 @@ module.exports = async function startServer () {
         }
     });
 
-    app.post("/task/:boardName", async (req, res) => {
+    app.post("board/:name", async (req, res) => {
         try {
-            const response = await UserController.requireAuthExtraParams(req.header("Authorization"), TaskController.createTask, req.body, req.params.boardName);
+            const response = await UserController.requireAuth(req.header("Authorization"), BoardController.deleteBoard, req.params.name);
+            res.send(response);
+        } catch (error) {
+            res.status(401);
+            res.send(JSON.stringify({error: error.message}));
+        }
+    });
+
+    app.post("/task/:name", async (req, res) => {
+        try {
+            const response = await UserController.requireAuthExtraParams(req.header("Authorization"), TaskController.createTask, req.body, req.params.name);
             res.send(response);
         } catch (error) {
             console.log(error);
@@ -148,6 +158,16 @@ module.exports = async function startServer () {
             res.send(JSON.stringify({error: error.message}))
         }
     });
+
+    app.get("/tasks/:boardId/:taskId", async (req, res) => {
+        try {
+            const response = await UserController.requireAuth(req.header("Authorization"), TaskController.getTaskByTaskName, {boardId: req.params.boardId, taskId: req.params.taskId});
+            res.send(response);
+        } catch (error) {
+            res.status(401);
+            res.send(JSON.stringify({error: error.message}));
+        }
+    })
 
     app.listen(port, () => console.log(`🚀 Escuchando en el puerto ${port}`));
 }
