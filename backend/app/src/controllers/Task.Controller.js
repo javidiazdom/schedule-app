@@ -74,7 +74,7 @@ const updateBoard = async (boardName, user) => {
     const actualBoard = await getBoardByName(boardName, user);
     for(task of actualBoard[0].tasks) {
         const actualTask = await Task.findById(task._id);
-        if(actualTask) updatedTasks.push(task);
+        if(actualTask) updatedTasks.push(actualTask);
     }
     await Board.findOneAndUpdate({name: boardName}, {tasks: updatedTasks}, {new : true});
 };
@@ -95,10 +95,18 @@ const getTaskByTaskName = async (params, user) => {
         }
     });
     return task;
-}
+};
+
+const updateTask = async (params, user) => {
+    await Task.findByIdAndUpdate(params.taskId, params.body);
+    await updateBoard(params.boardName, user);
+    await updateUser(params.boardName, user);
+    return await Task.findById(params.taskId);
+};
 
 exports.createTask = createTask;
 exports.getTasks = getTasks;
 exports.getTasksByBoardName = getTasksByBoardName;
 exports.removeTask = removeTask;
 exports.getTaskByTaskName = getTaskByTaskName;
+exports.updateTask = updateTask;
