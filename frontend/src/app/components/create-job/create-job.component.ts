@@ -31,7 +31,7 @@ export class CreateJobComponent implements OnInit {
     const newJob: Task = {
       name: this.jobName.value,
       descripcion: "",
-      boardName: this.boardName
+      boardName: this.boardName,
     } 
     this.httpService.createTask(newJob).subscribe((board) => {
       this.boardStatusService.updateBoards();

@@ -34,6 +34,10 @@ export class HttpService {
     return this.http.post(Routes.createTask(task.boardName), task, {headers: this.getHeaders()});  
   }
 
+  updateTask(taskId: String, task: Task) {
+    void 0;
+  }
+
   getTaskInfo(boardId: String,taskId: String): Observable<Task> {
     return this.http.get<Task>(Routes.getTaskInfo(boardId, taskId),{headers: this.getHeaders()});
   }

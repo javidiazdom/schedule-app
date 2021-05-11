@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from 'src/app/http-service.service';
 import { Board } from 'src/app/models/Board';
@@ -12,16 +13,25 @@ import { BoardComponent } from '../board/board.component';
 })
 export class SideBarComponent implements OnInit {
 
-  board: Board;
-  task: Task;
-
-  constructor(private httpService: HttpService, private route: ActivatedRoute) { }
-
-  ngOnInit(): void {
+  constructor(private httpService: HttpService, private route: ActivatedRoute) {
     const routeParams = this.route.snapshot.paramMap;
     this.httpService.getTaskInfo(routeParams.get('boardId'), routeParams.get('taskId')).subscribe(task => {
       this.task = task;
+      this.taskName.setValue(this.task.name);
     });
+  }
+
+  board: Board;
+  task: Task;
+
+  taskName = new FormControl('');
+
+  sendForm(): void {
+    this.httpService.updateTask(this.task._id, {name: this.taskName.value, ...this.task});
+  }
+
+
+  ngOnInit(): void {
   }
 
 }

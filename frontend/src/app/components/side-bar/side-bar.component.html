@@ -1,1 +1,9 @@
-<h1>{{task.name}}</h1>
+<div class="sidebar">
+    <div class = "editName" *ngIf="task">
+        <p>Nombre</p>
+        <input type = "text" [formControl]="taskName" (keydown.enter)="sendForm()"/>
+        <div class = "bottom">
+            <img src="assets/icons/Thrash-dark.svg"/>
+        </div>
+    </div>
+</div>
