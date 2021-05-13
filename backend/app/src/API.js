@@ -148,9 +148,9 @@ module.exports = async function startServer () {
         }
     });
 
-    app.post("/task/:boardName/:taskId", async (req, res) => {
+    app.post("/task/:boardId/:taskId", async (req, res) => {
         try {
-            await UserController.requireAuthExtraParams(req.header("Authorization"), TaskController.removeTask, req.params.boardName, req.params.taskId);
+            await UserController.requireAuthExtraParams(req.header("Authorization"), TaskController.removeTask, req.params.boardId, req.params.taskId);
             res.status(200);
             res.send("Borrado con exito");
         } catch(error) {

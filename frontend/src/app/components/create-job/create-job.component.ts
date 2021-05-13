@@ -32,7 +32,7 @@ export class CreateJobComponent implements OnInit {
       name: this.jobName.value,
       descripcion: "",
       boardName: this.boardName,
-    } 
+    }
     this.httpService.createTask(newJob).subscribe((board) => {
       this.boardStatusService.updateBoards();
     });

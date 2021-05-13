@@ -30,8 +30,12 @@ export class SideBarComponent implements OnInit {
     this.httpService.updateTask(this.task._id, {name: this.taskName.value, ...this.task});
   }
 
+  deleteTask(): void {
+    this.httpService.deleteTask(this.board.name, this.task._id);
+  }
 
   ngOnInit(): void {
+    
   }
 
 }

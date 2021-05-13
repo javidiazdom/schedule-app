@@ -3,7 +3,7 @@
         <p>Nombre</p>
         <input type = "text" [formControl]="taskName" (keydown.enter)="sendForm()"/>
         <div class = "bottom">
-            <img src="assets/icons/Thrash-dark.svg"/>
+            <img src="assets/icons/Thrash-dark.svg" (click) ="deleteTask()"/>
         </div>
     </div>
 </div>

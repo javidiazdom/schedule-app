@@ -34,6 +34,10 @@ export class HttpService {
     return this.http.post(Routes.createTask(task.boardName), task, {headers: this.getHeaders()});  
   }
 
+  deleteTask(boardName: String, taskId: String) {
+    return this.http.post(Routes.deleteTask(boardName,taskId), {Headers: this.getHeaders()});
+  }
+
   updateTask(taskId: String, task: Task) {
     void 0;
   }
