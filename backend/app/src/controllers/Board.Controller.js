@@ -20,7 +20,7 @@ const getBoardById = async (params, user) => {
     const boards = actualUser.boards;
     if(boards == null) throw new Error(`No existe tableros con la ${params} en el usuario ${user.user}`);
     const boardById = boards.filter((board) => board._id == params);
-    return boardById;
+    return boardById[0];
 };
 
 const getBoardByName = async (params, user) => {

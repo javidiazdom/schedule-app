@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpService } from 'src/app/http-service.service';
 import { Board } from 'src/app/models/Board';
 import { Task } from 'src/app/models/Task';
-import { BoardComponent } from '../board/board.component';
 
 @Component({
   selector: 'app-side-bar',
@@ -19,6 +18,9 @@ export class SideBarComponent implements OnInit {
       this.task = task;
       this.taskName.setValue(this.task.name);
     });
+    this.httpService.getBoardById(routeParams.get('boardId')).subscribe(board => {
+      this.board = board;
+    })
   }
 
   board: Board;
@@ -27,15 +29,22 @@ export class SideBarComponent implements OnInit {
   taskName = new FormControl('');
 
   sendForm(): void {
-    this.httpService.updateTask(this.task._id, {name: this.taskName.value, ...this.task});
+    console.log(this.taskName.value);
+    this.httpService.updateTask(this.board.name,this.task._id,{...this.task, name: this.taskName.value}).subscribe(
+      respone => {
+        window.location.replace("/boards");
+      }
+    )
   }
 
   deleteTask(): void {
-    this.httpService.deleteTask(this.board.name, this.task._id);
+    this.httpService.deleteTask(this.board.name, this.task._id).subscribe(
+      response => {
+        window.location.replace("/boards");
+      }
+    )
   }
 
   ngOnInit(): void {
-    
   }
-
 }

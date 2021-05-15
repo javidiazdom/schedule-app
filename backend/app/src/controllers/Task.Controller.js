@@ -55,7 +55,7 @@ const getTasks = async (params, user) => {
         const actualTasks = board.tasks;
         actualTasks.forEach((task) => tasks.push(task));
     }
-    return tasks;   
+    return tasks;
 };
 
 const getTasksByBoardName = async (params, user) => {
@@ -63,26 +63,24 @@ const getTasksByBoardName = async (params, user) => {
     return actualBoard[0].tasks;   
 };
 
-const removeTask = async (boardName, id, user) => {
-    await Task.findByIdAndDelete(id);
-    await updateBoard(boardName, user);
-    await updateUser(boardName, user);
+const removeTask = async (args, user) => {
+    await Task.findByIdAndDelete(args.taskId);
+    await updateBoard(args.boardName, user);
+    await updateUser(args.boardName, user);
 };
 
 const updateBoard = async (boardName, user) => {
     const updatedTasks = [];
-    const actualBoard = await getBoardById(boardName, user);
+    const actualBoard = await getBoardByName(boardName, user);
     for(task of actualBoard[0].tasks) {
         const actualTask = await Task.findById(task._id);
-        console.log(task);
         if(actualTask) updatedTasks.push(actualTask);
     }
-    let doc = await Board.findOneAndUpdate({name: actualBoard[0].name}, {tasks: updatedTasks}, {new : true});
-    doc.save();
+    await Board.findOneAndUpdate({name: actualBoard[0].name}, {tasks: updatedTasks}, {new : true});
 };
 
 const updateUser = async (boardName, user) => {
-    const actualBoard = await getBoardById(boardName, user);
+    const actualBoard = await getBoardByName(boardName, user);
     const updatedBoard = await Board.findById(actualBoard[0]._id);
     await User.findOneAndUpdate({username: user.user}, {boards: updatedBoard}, {new : true});
 };

@@ -26,6 +26,10 @@ export class HttpService {
     return this.http.get<Board[]>(Routes.getBoards, {headers: this.getHeaders()});
   }
 
+  getBoardById(boardId: String): Observable<Board> {
+    return this.http.get<Board>(Routes.getBoardById(boardId), {headers: this.getHeaders()})
+  }
+
   createBoard(board: Board) {
     return this.http.post(Routes.createBoard, board, {headers: this.getHeaders()});
   }
@@ -35,11 +39,11 @@ export class HttpService {
   }
 
   deleteTask(boardName: String, taskId: String) {
-    return this.http.post(Routes.deleteTask(boardName,taskId), {Headers: this.getHeaders()});
+    return this.http.delete(Routes.deleteTask(encodeURIComponent(boardName as string),taskId), {headers: this.getHeaders()});
   }
 
-  updateTask(taskId: String, task: Task) {
-    void 0;
+  updateTask(boardName: String, taskId: String, task: Task) {
+    return this.http.put(Routes.updateTask(encodeURIComponent(boardName as string), taskId), task, {headers: this.getHeaders()});
   }
 
   getTaskInfo(boardId: String,taskId: String): Observable<Task> {

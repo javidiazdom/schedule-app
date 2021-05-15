@@ -7,6 +7,8 @@ export const Routes = {
     createTask: (boardName: String) => {return `${URL}/task/${boardName}`},
     getTaskInfo: (boardId: String, taskId: String) => {return `${URL}/tasks/${boardId}/${taskId}`},
     deleteTask: (boardName: String, taskId: String) => {return `${URL}/tasks/${boardName}/${taskId}`},
+    getBoardById: (boardId: String) => {return `${URL}/board/${boardId}`},
+    updateTask: (boardName: String, taskId: String) => {return `${URL}/tasks/${boardName}/${taskId}`},
     getBoards: `${URL}/board`,
     deleteUser: `${URL}/deleteUser`
 }
