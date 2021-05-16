@@ -108,7 +108,7 @@ module.exports = async function startServer () {
         }
     });
 
-    app.post("/board/:name", async (req, res) => {
+    app.delete("/board/:name", async (req, res) => {
         try {
             const response = await UserController.requireAuth(req.header("Authorization"), BoardController.deleteBoard, req.params.name);
             res.send(response);

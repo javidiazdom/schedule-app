@@ -15,6 +15,7 @@ import { BoardsDisplayComponent } from './components/boards-display/boards-displ
 import { BoardComponent } from './components/board/board.component';
 import { CreateJobComponent } from './components/create-job/create-job.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { EditProfileComponent } from './auth/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
     BoardComponent,
     CreateJobComponent,
     SideBarComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

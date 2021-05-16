@@ -1,5 +1,8 @@
 <div class = "board">
-    <p>{{board.name}}</p>
+    <div class = "top-container">
+        <p>{{board.name}}</p>
+        <img src="assets/icons/Thrash-dark.svg" (click) ="deleteBoard()"  class="trash-icon"/>
+    </div>
     <div class = "tasks-container">
         <p>Por hacer</p>
         <div *ngFor = "let task of tasks" className = "task">

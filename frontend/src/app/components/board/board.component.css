@@ -9,6 +9,16 @@
     margin: 1rem;
 }
 
+.trash-icon {
+    cursor: pointer;
+}
+
+.top-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .tasks-container {
     background-color: rgba(255, 255, 255, 0.7);
     padding: 1rem 1.5rem;

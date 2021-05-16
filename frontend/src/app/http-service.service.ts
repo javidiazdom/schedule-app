@@ -26,6 +26,11 @@ export class HttpService {
     return this.http.get<Board[]>(Routes.getBoards, {headers: this.getHeaders()});
   }
 
+  deleteBoard(boardName: String): Observable<Board> {
+    console.log(Routes.deleteBoard(boardName));
+    return this.http.delete<Board>(Routes.deleteBoard(encodeURIComponent(boardName as string)), {headers: this.getHeaders()});
+  }
+
   getBoardById(boardId: String): Observable<Board> {
     return this.http.get<Board>(Routes.getBoardById(boardId), {headers: this.getHeaders()})
   }
