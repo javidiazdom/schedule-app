@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from '../auth/login/login.component';
 import { RegisterComponent} from "../auth/register/register.component";
 import { MainPageComponent } from "../pages/main-page/main-page.component";
-import { EditProfileComponent} from "../auth/edit-profile/edit-profile.component";
+import { EditProfileComponent } from "../auth/edit-profile/edit-profile.component";
 
 
 

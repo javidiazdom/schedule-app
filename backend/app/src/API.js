@@ -68,6 +68,16 @@ module.exports = async function startServer () {
         
     });
 
+    app.get("/profile", async (req, res) => {
+        try {
+            const response = await UserController.requireAuth(req.header("Authorization"), UserController.getProfile, req.body);
+            res.send(response);
+        } catch (error) {
+            res.status(401);
+            res.send(JSON.stringify({error: error.message}));
+        }
+    })
+
     app.post("/board", async (req, res) => {
         try {
             const response = await UserController.requireAuth(req.header("Authorization"), BoardController.createBoard, req.body);

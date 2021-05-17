@@ -6,6 +6,7 @@ import {UserRegisterData} from './models/UserRegisterData'
 import {Board} from './models/Board';
 import { Task } from './models/Task';
 import { Observable } from 'rxjs';
+import { ProfileData } from './models/ProfileData';
 
 
 @Injectable({
@@ -20,6 +21,14 @@ export class HttpService {
   }
   register(userResgisterData: UserRegisterData) {
     return this.http.post(Routes.register, userResgisterData);
+  }
+
+  getProfileData(): Observable<ProfileData> {
+    return this.http.get<ProfileData>(Routes.profileData, {headers: this.getHeaders()});
+  }
+
+  updateProfile(userProfileData: ProfileData) {
+    return this.http.post(Routes.updateProfile, userProfileData,{headers: this.getHeaders()});
   }
 
   getBoards(): Observable<Board[]> {
