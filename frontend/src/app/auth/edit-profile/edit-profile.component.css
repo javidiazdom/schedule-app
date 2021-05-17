@@ -22,7 +22,7 @@ label {
     font-size: 1.1rem;
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=date] {
     padding: 0.3rem;
     outline: none;
     border: 0px;

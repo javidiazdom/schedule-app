@@ -36,9 +36,7 @@ export class EditProfileComponent implements OnInit {
       birthDate: this.birthDate.value
     }
     this.httpService.updateProfile(newUser).subscribe((response) => {
-      if (response) {
         window.location.replace("/boards");
-      }
     });
   }
 

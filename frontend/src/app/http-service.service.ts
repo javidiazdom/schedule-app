@@ -28,7 +28,7 @@ export class HttpService {
   }
 
   updateProfile(userProfileData: ProfileData) {
-    return this.http.post(Routes.updateProfile, userProfileData,{headers: this.getHeaders()});
+    return this.http.put(Routes.updateProfile, userProfileData,{headers: this.getHeaders()});
   }
 
   getBoards(): Observable<Board[]> {

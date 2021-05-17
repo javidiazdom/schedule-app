@@ -4,7 +4,7 @@ export const Routes = {
     login: `${URL}/login`,
     register: `${URL}/register`,
     profileData: `${URL}/profile`,
-    updateProfile: `${URL}/update-profile`,
+    updateProfile: `${URL}/user`,
     createBoard: `${URL}/board`,
     createTask: (boardName: String) => {return `${URL}/task/${boardName}`},
     getTaskInfo: (boardId: String, taskId: String) => {return `${URL}/tasks/${boardId}/${taskId}`},
