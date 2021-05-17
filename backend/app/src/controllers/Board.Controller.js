@@ -1,6 +1,7 @@
 const Board = require('../models/Board');
 const User = require('../models/User');
 const Task = require('../models/Task');
+const { findById } = require('../models/Board');
 
 const createBoard = async (params, user) => {
     const actualUser = await User.findOne({username: user.user});
@@ -53,11 +54,33 @@ const updateUser = async (boardName, user) => {
             updatedBoards.push(board);
         }
     }
-    console.log(updatedBoards);
     await User.findOneAndUpdate({username: user.user}, {boards: updatedBoards}, {new: true});
 };
+
+const editUser = async (user) => {
+    const boards = await getBoards(null, user);
+    const boardsId = boards.map((board) => board._id);
+    const updatedBoards = [];
+    for(id of boardsId) {
+        updatedBoards.push(await Board.findById(id));
+    }
+    await User.findOneAndUpdate({username: user.user}, {boards: updatedBoards}, {new: true});
+};
+
+const editBoard = async (params, boardName, user) => {
+    try {
+        const actualBoard = await getBoardByName(boardName, user);
+        params.tasks = actualBoard[0].tasks;
+        await Board.findByIdAndUpdate(actualBoard[0]._id, params);
+        await editUser(user);
+    } catch(error) {
+        return error;
+    }
+};
+
 
 exports.createBoard = createBoard;
 exports.getBoardByName = getBoardByName;
 exports.getBoards = getBoards;
 exports.deleteBoard = deleteBoard;
+exports.editBoard = editBoard;
