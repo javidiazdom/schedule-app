@@ -189,7 +189,15 @@ module.exports = async function startServer () {
         }
     });
 
-
+    app.put("/user", async (req, res) => {
+        try {
+            const response = await UserController.requireAuth(req.header("Authorization"), UserController.editProfile, req.body);
+            res.send(response);
+        } catch (error) {
+            res.status(401);
+            res.send(JSON.stringify({error: error.message}));
+        }
+    });
 
     app.listen(port, () => console.log(`🚀 Escuchando en el puerto ${port}`));
 }
