@@ -16,6 +16,14 @@ const existBoardForUser = (boards, newBoard) => {
     return boards.find((board) => board.name === newBoard);
 };
 
+const getBoardById = async (params, user) => {
+    const actualUser = await User.findOne({username: user.user});
+    const boards = actualUser.boards;
+    if(boards == null) throw new Error(`No existe tableros con la ${params} en el usuario ${user.user}`);
+    const boardById = boards.filter((board) => board._id == params);
+    return boardById[0];
+};
+
 const getBoardByName = async (params, user) => {
     const actualUser = await User.findOne({username: user.user});
     const boards = actualUser.boards;
@@ -84,3 +92,4 @@ exports.getBoardByName = getBoardByName;
 exports.getBoards = getBoards;
 exports.deleteBoard = deleteBoard;
 exports.editBoard = editBoard;
+exports.getBoardById = getBoardById;

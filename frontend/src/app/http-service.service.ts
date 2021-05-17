@@ -6,6 +6,7 @@ import {UserRegisterData} from './models/UserRegisterData'
 import {Board} from './models/Board';
 import { Task } from './models/Task';
 import { Observable } from 'rxjs';
+import { ProfileData } from './models/ProfileData';
 
 
 @Injectable({
@@ -22,8 +23,25 @@ export class HttpService {
     return this.http.post(Routes.register, userResgisterData);
   }
 
+  getProfileData(): Observable<ProfileData> {
+    return this.http.get<ProfileData>(Routes.profileData, {headers: this.getHeaders()});
+  }
+
+  updateProfile(userProfileData: ProfileData) {
+    return this.http.post(Routes.updateProfile, userProfileData,{headers: this.getHeaders()});
+  }
+
   getBoards(): Observable<Board[]> {
     return this.http.get<Board[]>(Routes.getBoards, {headers: this.getHeaders()});
+  }
+
+  deleteBoard(boardName: String): Observable<Board> {
+    console.log(Routes.deleteBoard(boardName));
+    return this.http.delete<Board>(Routes.deleteBoard(encodeURIComponent(boardName as string)), {headers: this.getHeaders()});
+  }
+
+  getBoardById(boardId: String): Observable<Board> {
+    return this.http.get<Board>(Routes.getBoardById(boardId), {headers: this.getHeaders()})
   }
 
   createBoard(board: Board) {
@@ -32,6 +50,14 @@ export class HttpService {
 
   createTask(task: Task){
     return this.http.post(Routes.createTask(task.boardName), task, {headers: this.getHeaders()});  
+  }
+
+  deleteTask(boardName: String, taskId: String) {
+    return this.http.delete(Routes.deleteTask(encodeURIComponent(boardName as string),taskId), {headers: this.getHeaders()});
+  }
+
+  updateTask(boardName: String, taskId: String, task: Task) {
+    return this.http.put(Routes.updateTask(encodeURIComponent(boardName as string), taskId), task, {headers: this.getHeaders()});
   }
 
   getTaskInfo(boardId: String,taskId: String): Observable<Task> {

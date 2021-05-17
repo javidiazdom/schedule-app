@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const Board = require('../models/Board');
 const Task = require('../models/Task');
-const { getBoardByName } = require('./Board.controller');
+const { getBoardByName, getBoardById } = require('./Board.controller');
 
 const createTask = async (task, boardName, user) => {
     const actualBoard = await getActualBoard(boardName, user.user);
@@ -55,7 +55,7 @@ const getTasks = async (params, user) => {
         const actualTasks = board.tasks;
         actualTasks.forEach((task) => tasks.push(task));
     }
-    return tasks;   
+    return tasks;
 };
 
 const getTasksByBoardName = async (params, user) => {
@@ -63,10 +63,10 @@ const getTasksByBoardName = async (params, user) => {
     return actualBoard[0].tasks;   
 };
 
-const removeTask = async (boardName, id, user) => {
-    await Task.findByIdAndDelete(id);
-    await updateBoard(boardName, user);
-    await updateUser(boardName, user);
+const removeTask = async (args, user) => {
+    await Task.findByIdAndDelete(args.taskId);
+    await updateBoard(args.boardName, user);
+    await updateUser(args.boardName, user);
 };
 
 const updateBoard = async (boardName, user) => {
@@ -76,7 +76,7 @@ const updateBoard = async (boardName, user) => {
         const actualTask = await Task.findById(task._id);
         if(actualTask) updatedTasks.push(actualTask);
     }
-    await Board.findOneAndUpdate({name: boardName}, {tasks: updatedTasks}, {new : true});
+    await Board.findOneAndUpdate({name: actualBoard[0].name}, {tasks: updatedTasks}, {new : true});
 };
 
 const updateUser = async (boardName, user) => {
@@ -86,7 +86,6 @@ const updateUser = async (boardName, user) => {
 };
 
 const getTaskByTaskName = async (params, user) => {
-    console.log(params.boardId);
     const actualBoard = await Board.findOne({_id: params.boardId});
     task = null;
     actualBoard.tasks.forEach((currentTask) => {

@@ -68,6 +68,16 @@ module.exports = async function startServer () {
         
     });
 
+    app.get("/profile", async (req, res) => {
+        try {
+            const response = await UserController.requireAuth(req.header("Authorization"), UserController.getProfile, req.body);
+            res.send(response);
+        } catch (error) {
+            res.status(401);
+            res.send(JSON.stringify({error: error.message}));
+        }
+    })
+
     app.post("/board", async (req, res) => {
         try {
             const response = await UserController.requireAuth(req.header("Authorization"), BoardController.createBoard, req.body);
@@ -78,9 +88,19 @@ module.exports = async function startServer () {
         }
     });
 
-    app.get("/board/:name", async (req, res) => {
+    /*app.get("/board/:name", async (req, res) => {
         try {
             const response = await UserController.requireAuth(req.header("Authorization"), BoardController.getBoardByName, req.params.name);
+            res.send(response);
+        } catch (error) {
+            res.status(401);
+            res.send(JSON.stringify({error: error.message}));
+        }
+    });*/
+
+    app.get("/board/:id", async (req, res) => {
+        try {
+            const response = await UserController.requireAuth(req.header("Authorization"), BoardController.getBoardById, req.params.id);
             res.send(response);
         } catch (error) {
             res.status(401);
@@ -98,7 +118,7 @@ module.exports = async function startServer () {
         }
     });
 
-    app.post("/board/:name", async (req, res) => {
+    app.delete("/board/:name", async (req, res) => {
         try {
             const response = await UserController.requireAuth(req.header("Authorization"), BoardController.deleteBoard, req.params.name);
             res.send(response);
@@ -159,9 +179,29 @@ module.exports = async function startServer () {
         }
     });
 
-    app.put("/task/:boardName/:taskId", async (req, res) => {
+    app.delete("/tasks/:boardName/:taskId", async (req, res) => {
+        try {
+            const response = await UserController.requireAuth(req.header("Authorization"), TaskController.removeTask, {boardName: req.params.boardName, taskId: req.params.taskId});
+            res.send(response);
+        } catch (error) {
+            res.status(401);
+            res.send(JSON.stringify({error: error.message}));
+        }
+    });
+
+    app.put("/tasks/:boardName/:taskId", async (req, res) => {
         try {
             const response = await UserController.requireAuth(req.header("Authorization"), TaskController.updateTask, {boardName: req.params.boardName, taskId: req.params.taskId, body: req.body});
+            res.send(response);
+        } catch (error) {
+            res.status(401);
+            res.send(JSON.stringify({error: error.message}));
+        }
+    });
+
+    app.put("/user", async (req, res) => {
+        try {
+            const response = await UserController.requireAuth(req.header("Authorization"), UserController.editProfile, req.body);
             res.send(response);
         } catch (error) {
             res.status(401);

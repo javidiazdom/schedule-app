@@ -10,7 +10,7 @@
         </nav>
         <div class = "user-actions">
             <div class = "user-actions-row">
-                <p>Bienvenido, <b>{{ userName }}</b> </p><img (click)="deleteUser()" src="assets/icons/Thrash.svg">
+                <p>Bienvenido, <a href="/edit-profile"><b>{{ userName }}</b></a> </p><img (click)="deleteUser()" src="assets/icons/Thrash.svg">
             </div>
             <app-logout></app-logout>
         </div>

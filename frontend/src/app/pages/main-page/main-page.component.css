@@ -1,7 +1,7 @@
 .main-container {
     height: 100vh;
     display: grid;
-    grid-template-rows: 20% 60% 20%;
+    grid-template-rows: 15% 75% 10%;
     grid-template-columns: 25% 25% 25% 25%;
     grid-template-areas: 
         "header header header header"
@@ -30,6 +30,17 @@
 
 b {
     color: #FCFF6B;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    
+}
+
+a:hover {
+    text-decoration: underline;
+    text-decoration-color: #FCFF6B;
 }
 
 nav {

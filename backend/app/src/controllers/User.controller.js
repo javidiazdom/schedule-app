@@ -16,7 +16,7 @@ const login = async (loginCredentials) => {
     const accessToken = jwt.sign({user: user.username}, config.SECRET);
     // Add role
     return JSON.stringify({accessToken, user: user.name, username: user.username});
-}
+};
 
 const register = async (userData) => {
     if (!userData.name || !userData.username || !userData.password || !userData.birthDate) {
@@ -37,12 +37,12 @@ const register = async (userData) => {
     });
     await newUser.save();
     return JSON.stringify({result: true});
-}
+};
 
 const getUsers = async () => {
     const users = await User.find();
     return users;
-}
+};
 
 const requireAuth = async (auth,f,params) => {
     if(!auth) throw new Error("Necesitas estar logueado");
@@ -51,7 +51,7 @@ const requireAuth = async (auth,f,params) => {
     const user = await jwt.verify(token, config.SECRET);
     if(!user) throw new Error("Usuario no identificado");
     return await f(params,user);
-}
+};
 
 const requireAuthExtraParams = async (auth,f,params,aditionalParams) => {
     if(!auth) throw new Error("Necesitas estar logueado");
@@ -60,12 +60,30 @@ const requireAuthExtraParams = async (auth,f,params,aditionalParams) => {
     const user = await jwt.verify(token, config.SECRET);
     if(!user) throw new Error("Usuario no identificado");
     return await f(params,aditionalParams,user);
-}
+};
 
 const deleteUser = async (params, user) => {
     try {
         await User.deleteOne({username: user.user});
         return true; 
+    } catch (error) {
+        return error;
+    }
+};
+
+const editProfile = async (params, user) => {
+    try {
+        const actualUser = await User.findOne({username: user.user});
+        params.boards = actualUser.boards;
+        await User.findByIdAndUpdate(actualUser._id, params);
+    } catch(error) {
+        return error;
+    }
+};
+
+const getProfile = async (params, user) => {
+    try {
+        return await User.findOne({username: user.user},['name', 'username', 'birthDate']);
     } catch (error) {
         return error;
     }
@@ -78,3 +96,5 @@ exports.getUsers = getUsers;
 exports.requireAuth = requireAuth;
 exports.requireAuthExtraParams = requireAuthExtraParams;
 exports.deleteUser = deleteUser;
+exports.getProfile = getProfile;
+exports.editProfile = editProfile;
