@@ -128,6 +128,16 @@ module.exports = async function startServer () {
         }
     });
 
+    app.put("/board/:name", async (req, res) => {
+        try {
+            const response = await UserController.requireAuthExtraParams(req.header("Authorization"), BoardController.editBoard, req.body, req.params.name);
+            res.send(response);
+        } catch (error) {
+            res.status(401);
+            res.send(JSON.stringify({error: error.message}));
+        }
+    });
+
     app.post("/task/:name", async (req, res) => {
         try {
             const response = await UserController.requireAuthExtraParams(req.header("Authorization"), TaskController.createTask, req.body, req.params.name);
