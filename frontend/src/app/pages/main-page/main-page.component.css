@@ -32,6 +32,17 @@ b {
     color: #FCFF6B;
 }
 
+a {
+    text-decoration: none;
+    cursor: pointer;
+    
+}
+
+a:hover {
+    text-decoration: underline;
+    text-decoration-color: #FCFF6B;
+}
+
 nav {
     display: flex;
     flex-direction: row;

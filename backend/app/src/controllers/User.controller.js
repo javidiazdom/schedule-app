@@ -81,6 +81,14 @@ const editProfile = async (params, user) => {
     }
 };
 
+const getProfile = async (params, user) => {
+    try {
+        return await User.findOne({username: user.user},['name', 'username', 'birthDate']);
+    } catch (error) {
+        return error;
+    }
+}
+
 
 exports.login = login;
 exports.register = register;
@@ -88,4 +96,5 @@ exports.getUsers = getUsers;
 exports.requireAuth = requireAuth;
 exports.requireAuthExtraParams = requireAuthExtraParams;
 exports.deleteUser = deleteUser;
+exports.getProfile = getProfile;
 exports.editProfile = editProfile;
