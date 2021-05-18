@@ -1,6 +1,6 @@
 <div class = "board">
     <div class = "top-container">
-        <p>{{board.name}}</p>
+        <p (click)="editBoard()">{{board.name}}</p>
         <img src="assets/icons/Thrash-dark.svg" (click) ="deleteBoard()"  class="trash-icon"/>
     </div>
     <div class = "tasks-container">

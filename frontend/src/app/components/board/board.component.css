@@ -19,6 +19,10 @@
     justify-content: space-between;
 }
 
+.top-container p{
+    cursor: pointer;
+}
+
 .tasks-container {
     background-color: rgba(255, 255, 255, 0.7);
     padding: 1rem 1.5rem;

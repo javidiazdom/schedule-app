@@ -1,6 +1,11 @@
 <div class="sidebar">
+    <div class = "editName" *ngIf="board">
+        <p>Nombre Tablero</p>
+        <input type = "text" [formControl]="boardName" (keydown.enter)="sendForm()"/>
+    </div>
+    
     <div class = "editName" *ngIf="task">
-        <p>Nombre</p>
+        <p>Nombre Tarea</p>
         <input type = "text" [formControl]="taskName" (keydown.enter)="sendForm()"/>
         <div class = "bottom">
             <img src="assets/icons/Thrash-dark.svg" (click) ="deleteTask()"/>

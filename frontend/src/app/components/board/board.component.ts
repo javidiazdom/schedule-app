@@ -23,6 +23,10 @@ export class BoardComponent implements OnInit {
     );
   }
 
+  editBoard(): void{
+    window.location.replace(`/boards/${this.board._id}`)
+  };
+
   ngOnInit(): void {
     this.tasks = this.board.tasks;
   }
