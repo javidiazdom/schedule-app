@@ -8,13 +8,13 @@ import { EditProfileComponent } from "../auth/edit-profile/edit-profile.componen
 
 
 const routes: Routes = [
-  {path: '', component: LoginComponent},
-  {path: `login`, component: LoginComponent},
-  {path: `register`, component: RegisterComponent},
+  {path: '', component: LoginComponent },
+  {path: `login`, component: LoginComponent },
+  {path: `register`, component: RegisterComponent },
   {path: 'boards', component: MainPageComponent },
-  {path: 'boards/:boardName', component: MainPageComponent },
+  {path: 'board/:boardName', component: MainPageComponent },
   {path: 'boards/:boardId/:taskId', component: MainPageComponent },
-  {path: 'edit-profile', component: EditProfileComponent}
+  {path: 'edit-profile', component: EditProfileComponent }
 ]
 
 @NgModule({

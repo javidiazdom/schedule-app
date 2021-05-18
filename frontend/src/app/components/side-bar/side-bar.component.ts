@@ -14,6 +14,7 @@ export class SideBarComponent implements OnInit {
 
   constructor(private httpService: HttpService, private route: ActivatedRoute) {
     const routeParams = this.route.snapshot.paramMap;
+    this.boardName = routeParams.get('boardName') || '';
     this.httpService.getTaskInfo(routeParams.get('boardId'), routeParams.get('taskId')).subscribe(task => {
       this.task = task;
       this.taskName.setValue(this.task.name);
@@ -23,15 +24,24 @@ export class SideBarComponent implements OnInit {
     })
   }
 
+  boardName: String;
   board: Board;
   task: Task;
 
   taskName = new FormControl('');
+  boardNameControl = new FormControl('');
 
   sendForm(): void {
-    console.log(this.taskName.value);
     this.httpService.updateTask(this.board.name,this.task._id,{...this.task, name: this.taskName.value}).subscribe(
-      respone => {
+      response => {
+        window.location.replace("/boards");
+      }
+    )
+  }
+
+  sendBoardNameForm(): void {
+    this.httpService.updateBoard(this.boardNameControl.value, this.boardName).subscribe(
+      response => {
         window.location.replace("/boards");
       }
     )
@@ -46,5 +56,6 @@ export class SideBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.boardNameControl.setValue(this.boardName);
   }
 }

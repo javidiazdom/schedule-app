@@ -17,7 +17,7 @@
     </div>
     <div class = "body">
         <app-boards-display></app-boards-display>
-        <app-side-bar *ngIf="currentBoard || currentTask" [board]="currentBoard" [task]="currentTask"></app-side-bar>
+        <app-side-bar *ngIf="currentBoard || currentTask || currentBoardName" [board]="currentBoard" [task]="currentTask" [boardName]="currentBoardName"></app-side-bar>
     </div>
     <div class = "footer">
 

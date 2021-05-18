@@ -16,6 +16,8 @@ export class MainPageComponent implements OnInit {
 
   currentBoard: String;
 
+  currentBoardName: String;
+
   currentTask: String;
 
   deleteUser(): void {
@@ -33,7 +35,8 @@ export class MainPageComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    const routeParams = this.route.snapshot.paramMap;
+    const routeParams = this.route.snapshot.paramMap;  
+    this.currentBoardName = routeParams.get('boardName');
     this.currentTask = routeParams.get('taskId');
     this.currentBoard = routeParams.get('boardId');
   }

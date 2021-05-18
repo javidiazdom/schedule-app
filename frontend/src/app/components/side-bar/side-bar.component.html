@@ -1,9 +1,8 @@
 <div class="sidebar">
-    <div class = "editName" *ngIf="board">
+    <div class = "editName" *ngIf="boardName">
         <p>Nombre Tablero</p>
-        <input type = "text" [formControl]="boardName" (keydown.enter)="sendForm()"/>
+        <input type = "text" [formControl]="boardNameControl" (keydown.enter)="sendBoardNameForm()"/>
     </div>
-    
     <div class = "editName" *ngIf="task">
         <p>Nombre Tarea</p>
         <input type = "text" [formControl]="taskName" (keydown.enter)="sendForm()"/>

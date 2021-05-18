@@ -48,8 +48,8 @@ export class HttpService {
     return this.http.post(Routes.createBoard, board, {headers: this.getHeaders()});
   }
 
-  updateBoard(board: Board, boardName: String){
-    return this.http.put(Routes.updateBoard(encodeURIComponent(boardName as string)), board,{headers: this.getHeaders()});
+  updateBoard(newBoardName: String, boardName: String){
+    return this.http.put(Routes.updateBoard(encodeURIComponent(boardName as string)), {name: newBoardName},{headers: this.getHeaders()});
   }
 
   createTask(task: Task){
